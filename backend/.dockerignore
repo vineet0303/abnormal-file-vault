@@ -1,0 +1,35 @@
+# backend/.dockerignore
+# Files and directories to ignore when building the Docker image
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.idea/
+.vscode/
+*.sqlite3
+*.log
+db.sqlite3
+
+# Ignore media and static files from being copied into the image
+# These should ideally be handled by volumes or collected separately
+mediafiles/ 
+staticfiles/ 
+
+# Ignore environment file and sensitive local settings
+.env
+local_settings.py
+
+# Git files
+.git/
+.gitignore
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+

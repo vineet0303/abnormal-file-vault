@@ -1,0 +1,84 @@
+    # docker-compose.yml
+    # Defines the services, networks, and volumes for the application stack
+
+    # version: '3.8' # Obsolete, can be removed
+
+    services:
+      # --- Backend Service (Django + Gunicorn) ---
+      backend:
+        build:
+          context: ./backend # Path to the directory containing the backend Dockerfile
+        container_name: abnormal_vault_backend
+        command: gunicorn backend.wsgi:application --bind 0.0.0.0:8000 --workers 4 # Command to run Gunicorn
+        volumes:
+          # Mount volume for static files (collected by Django)
+          - static_volume:/app/staticfiles
+          # Mount volume for user-uploaded media files
+          - media_volume:/app/mediafiles
+        ports:
+          # Map host port 8000 to container port 8000
+          - "8000:8000"
+        env_file:
+          # Load environment variables from the .env file in the backend directory
+          - ./backend/.env
+        depends_on:
+          # Ensure the database service starts before the backend
+          - db
+        networks:
+          # Connect to the custom network
+          - vault_network
+
+      # --- Frontend Service (React + Nginx) ---
+      frontend:
+        build:
+          context: ./frontend # Path to the directory containing the frontend Dockerfile
+          # --- Add build arguments ---
+          args:
+            # Define the API URL to be used during the React build process
+            # It points to the backend service accessible from the host machine
+            REACT_APP_API_BASE_URL: http://localhost:8000 
+          # --- End build arguments ---
+        container_name: abnormal_vault_frontend
+        volumes:
+          # Mount volume for static files (served by Nginx)
+          - static_volume:/usr/share/nginx/html/static # Nginx needs access to Django's static files too (admin)
+        ports:
+          # Map host port 3000 to container port 80 (Nginx default)
+          - "3000:80"
+        depends_on:
+          # Depends on backend
+          - backend
+        networks:
+          # Connect to the custom network
+          - vault_network
+
+      # --- Database Service (PostgreSQL) ---
+      db:
+        image: postgres:15-alpine # Use official PostgreSQL image
+        container_name: abnormal_vault_db
+        volumes:
+          # Persist database data using a named volume
+          - postgres_data:/var/lib/postgresql/data/
+        environment:
+          # Set database credentials EXPLICITLY here.
+          # These MUST MATCH the values in backend/.env!
+          POSTGRES_DB: abnormal_vault_db          # Replace if you used a different name in .env
+          POSTGRES_USER: abnormal_vault_user        # Replace if you used a different name in .env
+          POSTGRES_PASSWORD: Vineet@0605 # Replace with the SAME password from backend/.env
+        networks:
+          # Connect to the custom network
+          - vault_network
+
+    # --- Volumes Definition ---
+    # Define named volumes for persistent data
+    volumes:
+      postgres_data: # For database persistence
+      static_volume: # For Django static files (CSS, JS for admin etc.)
+      media_volume:  # For user-uploaded files
+
+    # --- Network Definition ---
+    # Define a custom bridge network for services to communicate
+    networks:
+      vault_network:
+        driver: bridge
+    

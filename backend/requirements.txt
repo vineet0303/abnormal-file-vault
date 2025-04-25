@@ -1,0 +1,21 @@
+# backend/requirements.txt
+# Corrected package names and example versions.
+# Generate using: pip freeze > requirements.txt in your activated venv
+# after installing all packages successfully.
+
+asgiref==3.8.1 
+Django==5.0.4 # Or your specific Django version
+django-cors-headers==4.3.1 # CORRECTED package name
+django-filter==24.2
+djangorestframework==3.15.1
+gunicorn==22.0.0 # For production deployment
+psycopg2-binary==2.9.9 # PostgreSQL adapter
+python-dotenv==1.0.1
+pytz==2024.1 # Often a dependency
+sqlparse==0.5.0 # Django dependency
+tzdata==2024.1 # Dependency of pytz on some systems
+
+# NOTE: Run 'pip freeze > requirements.txt' again in your activated 
+# virtual environment AFTER successfully running 'pip install ...' 
+# if you want to lock down the exact versions installed.
+

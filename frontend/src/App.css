@@ -1,0 +1,173 @@
+/* src/App.css */
+
+/* Basic Reset */
+body, h1, h2, h3, p, ul, li, button, input, label {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Better sizing calculations */
+  font-family: sans-serif; /* Basic font */
+}
+
+body {
+  background-color: #e9ecef; /* Light grey background for the page */
+}
+
+.App {
+  /* text-align: center; Remove if centering is handled by containers */
+}
+
+.App-header {
+  background-color: #282c34; 
+  padding: 20px; /* Reduced padding */
+  color: white;
+  text-align: center;
+  margin-bottom: 20px; /* Space below header */
+}
+
+main {
+  padding: 20px; 
+  max-width: 900px; /* Limit overall content width */
+  margin: 0 auto; /* Center the main content area */
+}
+
+/* --- 3D Container Style --- */
+.container-3d {
+  background-color: #f8f9fa; /* A light background for the container */
+  padding: 25px 35px;       /* Generous padding inside the container */
+  margin: 30px auto;        /* Vertical space and auto horizontal margins to center */
+  border-radius: 8px;       /* Slightly rounded corners */
+  border: 1px solid #dee2e6; /* A subtle border */
+  box-shadow: 
+    4px 4px 10px rgba(0, 0, 0, 0.15), /* Main shadow for depth */
+    -2px -2px 5px rgba(255, 255, 255, 0.7); /* Subtle top/left highlight */
+  max-width: 700px;         /* Prevent it from getting too wide on large screens */
+  box-sizing: border-box;   /* Include padding/border in element's total width/height */
+}
+
+/* Style for individual file list items */
+.file-item-3d { 
+  background-color: #ffffff; /* White background for item */
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px; /* Space between items */
+  padding: 15px; 
+  list-style: none; /* Remove bullet points */
+}
+
+/* Input styles within containers */
+.container-3d input[type="text"],
+.container-3d input[type="email"],
+.container-3d input[type="password"] {
+    width: 95%; /* Take most of the width */
+    padding: 10px; /* Slightly larger padding */
+    margin-bottom: 15px; /* More space below inputs */
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem; /* Ensure readable font size */
+}
+
+.container-3d label {
+    display: block; /* Make labels appear on their own line */
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left; /* Align labels left */
+}
+
+/* --- 3D Button Style --- */
+.button-3d {
+  display: inline-block; 
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* Example blue */
+  border: none;
+  border-bottom: 4px solid #0056b3; /* Darker shade for depth */
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative; /* Needed for hover effect */
+  top: 0;
+  transition: all 0.1s ease-in-out; /* Smooth transition */
+  margin: 5px; /* Add some margin around buttons */
+}
+
+.button-3d:hover {
+  background-color: #0069d9; /* Slightly lighter blue on hover */
+  top: 2px; /* Move button down slightly */
+  border-bottom-width: 2px; /* Reduce bottom border */
+}
+
+.button-3d:active {
+  top: 4px; /* Move further down when clicked */
+  border-bottom-width: 0px; /* Remove bottom border completely */
+  box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.3); /* Optional inset shadow */
+}
+
+/* Style for disabled state */
+.button-3d:disabled {
+  background-color: #cccccc;
+  border-bottom-color: #999999;
+  cursor: not-allowed;
+  top: 0;
+  box-shadow: none;
+}
+
+/* Link-style button for navigation */
+.button-link-style { 
+   background: none !important;
+   border: none !important;
+   padding: 0 !important;
+   color: blue;
+   text-decoration: underline;
+   cursor: pointer;
+   box-shadow: none !important; 
+   margin: 0 5px; 
+   font-weight: normal; 
+   top: 0 !important; 
+}
+.button-link-style:hover, .button-link-style:active {
+    text-decoration: none; 
+    background: none !important;
+    border: none !important;
+    top: 0 !important;
+}
+
+/* --- File Input Styling --- */
+.hidden-file-input {
+  /* Make it effectively invisible but still functional */
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; /* Ensure it's behind other elements */
+}
+
+/* Ensure the label behaves like a button */
+label.button-3d {
+    display: inline-block; 
+    margin-right: 10px; /* Space between Choose File and filename */
+}
+
+/* Center align form buttons if needed */
+.form-actions {
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Success message styling */
+.success-message {
+  color: green;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
